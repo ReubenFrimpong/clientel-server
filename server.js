@@ -26,8 +26,10 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
+require("./routes/clients.routes")(app)
+require("./routes/providers.routes")(app)
 
-const db = require("./app/models");
+const db = require("./models");
 db.mongoose
     .connect(db.url, {
         useNewUrlParser: true,

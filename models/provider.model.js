@@ -3,14 +3,10 @@ module.exports = mongoose => {
     var schema = mongoose.Schema(
         {
             name: String,
-            email: String,
-            phone: String,
-            providers:[{
-                id:{
-                    type: Schema.Types.ObjectId,
-                    ref: 'Provider',
-                }
-            }]
+            client:{
+                type: Schema.Types.ObjectId,
+                ref: "Client"
+            }
         },
     );
 
@@ -20,5 +16,5 @@ module.exports = mongoose => {
         return object;
     });
 
-    return mongoose.model("client", schema);
+    return mongoose.model("provider", schema);
 };
