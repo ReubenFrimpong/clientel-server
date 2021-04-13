@@ -1,6 +1,6 @@
 const db = require("../models")
 const Client = db.clients
-const Provider = db.providers
+
 // Create and Save a new Client
 exports.create = (req, res) => {
 
@@ -12,11 +12,6 @@ exports.create = (req, res) => {
     })
 
     client.save(client).then(data => {
-        // Client.findOne({_id: data._id}, (err, client) => {
-        //     client.save()
-        //     client.providers.push(req.body.providers)
-        //     client.save()
-        // })
         res.send(data)
     }).catch(err =>{
         res.status(500).send({
@@ -25,17 +20,18 @@ exports.create = (req, res) => {
     })
 };
 
-// Retrieve all Client from the database.
+// Retrieve all Clients from the database.
 exports.findAll = (req, res) => {
 
     Client.find({})
+        .populate('providers')
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while retrieving tutorials."
+                    err.message || "Some error occurred while retrieving clients."
             });
         });
 };
@@ -45,15 +41,16 @@ exports.findOne = (req, res) => {
     const id = req.params.id;
 
     Client.findById(id)
+        .populate('providers')
         .then(data => {
             if (!data)
-                res.status(404).send({ message: "Not found Tutorial with id " + id });
+                res.status(404).send({ message: "Not found Client with id " + id });
             else res.send(data);
         })
         .catch(err => {
             res
                 .status(500)
-                .send({ message: "Error retrieving Tutorial with id=" + id });
+                .send({ message: "Error retrieving Client with id=" + id });
         });
 };
 
@@ -76,7 +73,7 @@ exports.update = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error updating Tutorial with id=" + id
+                message: "Error updating Client with id=" + id
             });
         });
 };
@@ -89,17 +86,17 @@ exports.delete = (req, res) => {
         .then(data => {
             if (!data) {
                 res.status(404).send({
-                    message: `Cannot delete Client with id=${id}. Maybe Tutorial was not found!`
+                    message: `Cannot delete Client with id=${id}. Maybe Client was not found!`
                 });
             } else {
                 res.send({
-                    message: "Tutorial was deleted successfully!"
+                    message: "Client was deleted successfully!"
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Could not delete Tutorial with id=" + id
+                message: "Could not delete Client with id=" + id
             });
         });
 };
