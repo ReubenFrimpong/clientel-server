@@ -44,8 +44,6 @@ module.exports = app => {
  *
  */
 
-// Retrieve all Clients
-    router.get("/", clients.findAll);
 /**
  * @swagger
  *  /api/clients:
@@ -62,10 +60,10 @@ module.exports = app => {
  *                              items:
  *                                  $ref:'#/components/schemas/Client'
  */
+// Retrieve all Clients
+    router.get("/", clients.findAll);
 
 
-// Retrieve a single Client with id
-    router.get("/:id", clients.findOne);
 /**
  *@swagger
  *  /api/clients/{id}:
@@ -91,10 +89,10 @@ module.exports = app => {
  *              500:
  *                  description: Server error
  */
+// Retrieve a single Client with id
+    router.get("/:id", clients.findOne);
 
 
-// Create a new Client
-    router.post("/", clients.create);
 /**
  * @swagger
  *  /api/clients:
@@ -117,6 +115,9 @@ module.exports = app => {
  *             500:
  *                  description: Server error
  */
+// Create a new Client
+    router.post("/", clients.create);
+
 
 
 /**
