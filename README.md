@@ -2,7 +2,7 @@
 
 ## Project setup
 ```
-npm install
+sudo npm install
 ```
 
 ### Run Node Server
